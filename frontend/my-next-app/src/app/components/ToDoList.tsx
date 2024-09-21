@@ -72,13 +72,13 @@ export const ToDoList = () => {
         try {
             if (!currentTodo || !currentTodo.title) return;
             const encodedTitle = encodeURIComponent(currentTodo.title);
-            const response = await fetch(`http://127.0.0.1:8000/api/todo/${encodedTitle}`, {
+            const response = await fetch(`http://127.0.0.1:8000/api/todo${encodedTitle}`, {
                 method: "DELETE",
             });
             if (response.ok) {
                 console.log("Task deleted successfully");
                 setModalOpen(false);
-                // Remove the deleted todo from the state
+                
                 setTodos(todos.filter(todo => todo.title !== currentTodo.title));
             } else {
                 console.error("Failed to delete task");
@@ -124,7 +124,7 @@ export const ToDoList = () => {
             {modalOpen && currentTodo && (
                 <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
                     {isEditing ? (
-                        // Edit Form
+                        
                         <div className="p-4">
                             <h4 className="font-bold text-lg">Edit Task</h4>
                             <form onSubmit={handleUpdateSubmit}>
